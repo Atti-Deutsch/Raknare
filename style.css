@@ -1,0 +1,121 @@
+
+
+html {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center; /*Horizontal*/
+    align-items: center;     /*Vertical*/
+    background: linear-gradient(to left, #25a89d, #0579a3); 
+}
+
+.calculator {
+    background: rgb(8, 8, 8);
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px -5px rgba(0, 0, 0, 0.6);
+}
+
+.calculator-display {
+    background:rgba(0, 0, 0, 0);
+    color: rgb(31, 233, 31);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-radius: 10px 10px 0 0; /*top left. top right, bottom left, bottom right*/
+}
+
+.calculator-display h1 {
+    margin: 0;
+    padding: 25px;
+    font-size: 40px;
+    font-family: 'Lucida Consol', sans-serif;
+    font-weight: 100;
+    overflow-x: auto;    /* scrollbar if necessary it will add*/
+}
+
+/*  Custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(100, 99, 99);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(31, 233, 31);
+}
+
+/* Buttons */
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+button {
+  min-height: 50px;
+  font-size: 20px;
+  font-weight: 100;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: rgb(228, 225, 225);
+  color: rgb(10, 10, 10);
+}
+
+button:hover {
+  background:rgb(31, 233, 31)
+}
+
+button:active {
+  transform: translateY(1px); /* Button "down" by 1px when pushed*/
+}
+
+button:focus {
+  outline: none;
+}
+
+.operator {
+  background:rgb(100, 99, 99);
+  color:rgb(228, 225, 225);
+  font-size: 40px;
+}
+
+.clear {
+  background: rgb(196, 21, 56);
+  color: rgb(228, 225, 225);
+}
+
+.clear:hover {
+  background: rgb(255, 0, 0);
+}
+
+.equal-sign {
+  grid-column: -2;
+  grid-row: 2 / span 4;
+}
+
+/* Media Query: Large smartphone (Vertical) */ 
+@media screen and (max-width: 600px) {
+  .calculator {
+    width: 95%;
+  }
+}
+
+
