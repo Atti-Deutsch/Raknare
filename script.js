@@ -2,6 +2,19 @@ const calculatorDisplay = document.querySelector('h1');
 const inputBtns = document.querySelectorAll('button'); 
 const clearBtn = document.getElementById('clear-btn');
 
+// Calculate first and second values, depending on operator
+const calculate = {
+    '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+
+    '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+
+    '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+
+    '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+
+    '=': (firstNumber, secondNumber) => secondNumber,
+};
+
 let firstValue = 0; //number
 let operatorValue = ''; //empty string
 let awaitingNextValue = false; // boolean
@@ -29,17 +42,28 @@ function addDecimal() {
 
 function useOperator(operator) {
     const currentValue = Number(calculatorDisplay.textContent);
+    // Prevent multiple operators
+    if (operatorValue && awaitingNextValue) return;  
     // Assign first value if no value exist (loading page first time value = 0 "let firstValue")
     if (!firstValue) {
        firstValue = currentValue; 
     } else {
-        console.log('currentValue', currentValue);
+        // Store result calc object
+        const calculation = calculate[operatorValue](firstValue, currentValue);
+        calculatorDisplay.textContent = calculation;
+        firstValue = calculation;
     }
     // ready for nex value, store operator
     awaitingNextValue = true;  //triggered after operator press(second value)
     operatorValue = operator;
-    console.log('firstValue', firstValue);
-    console.log('operator', operatorValue);
+}
+
+// Reset all values, display
+function resetAll() {
+    firstValue = 0; //number
+    operatorValue = ''; //empty string
+    awaitingNextValue = false; // boolean
+    calculatorDisplay.textContent = '0';
 }
 
 // Add Event Listeners for numbers, operators, decimal buttons
@@ -52,14 +76,6 @@ inputBtns.forEach((inputBtn) => {
         inputBtn.addEventListener('click', () => addDecimal());
     }
 });
-
-// Reset all values, display
-function resetAll() {
-    firstValue = 0; //number
-    operatorValue = ''; //empty string
-    awaitingNextValue = false; // boolean
-    calculatorDisplay.textContent = '0';
-}
 
 // Event Listener
 clearBtn.addEventListener('click', resetAll);
